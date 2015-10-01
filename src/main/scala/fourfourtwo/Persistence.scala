@@ -1,20 +1,12 @@
 package fourfourtwo
 
+import java.sql.Timestamp
 import java.util
 import java.util.StringTokenizer
-import java.util.concurrent.TimeUnit
-
-import org.json.simple
-import org.json.simple.JSONObject
 
 import scala.slick.driver.PostgresDriver.simple._
-import scala.slick.jdbc.meta.MBestRowIdentifierColumn.Scope.Session
 import scala.slick.jdbc.meta.MTable
 import scala.slick.lifted.{TableQuery, Tag}
-import java.sql.{Timestamp, Date}
-
-import scala.concurrent.Await
-import scala.concurrent.duration.Duration
 
 case class League(name: String, FFT_ID: Long, id: Long = 0)
 
