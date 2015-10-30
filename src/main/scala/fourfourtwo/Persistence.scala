@@ -22,37 +22,37 @@ case class StartingXI(game_id: Long, team_id: Long, player_id: Long)
 
 case class Sub(game_id: Long, team_id: Long, player_id: Long)
 
-case class Penalty(game_id: Long, team_id: Long, player_id: Long, time: Int, result: Int) 
+case class Penalty(game_id: Long, team_id: Long, player_id: Long, time: String, result: Int)
 	/* result: On-Target=1 ; Off-Target=2 ; Goal=3 ; Block=4 */
 
-case class Substitution(game_id: Long, team_id: Long, sub_in_player_id: Long, sub_out_player_id: Long, time: Int)
+case class Substitution(game_id: Long, team_id: Long, sub_in_player_id: Long, sub_out_player_id: Long, time: String)
 
-case class ReceivedPass(game_id: Long, team_id: Long, player_id: Long, time: Int, location_start: String, location_end: String, result: Int) 
+case class ReceivedPass(game_id: Long, team_id: Long, player_id: Long, time: String, location_start: String, location_end: String, result: Int)
 	/* result: Success=1 ; Fail=2 ; Assist=3 ; Chance Created=4 */
 
-case class Pass(game_id: Long, team_id: Long, player_id: Long, time: Int, location_start: String, location_end: String, result: Int, third: Int, free_kick: Boolean)
+case class Pass(game_id: Long, team_id: Long, player_id: Long, time: String, location_start: String, location_end: String, result: Int, third: Int, free_kick: Boolean)
 	/* result: Success=1 ; Fail=0 ; */
 
-case class Assist(game_id: Long, team_id: Long, player_id: Long, time: Int, location_start: String, location_end: String, from: Boolean) 
+case class Assist(game_id: Long, team_id: Long, player_id: Long, time: String, location_start: String, location_end: String, from: Boolean)
 	/* from: open_play=1 ; set_play=0 ; */
 
-case class FormationChange(game_id: Long, team_id: Long, time: Int, formation: String)
+case class FormationChange(game_id: Long, team_id: Long, time: String, formation: String)
 
-case class TakeOn(game_id: Long, team_id: Long, player_id: Long, time: Int, location: String, result: Boolean)
+case class TakeOn(game_id: Long, team_id: Long, player_id: Long, time: String, location: String, result: Boolean)
 	/* result: Success=1 ; Fail=0 */
 
-case class ChanceCreated(game_id: Long, team_id: Long, player_id: Long, time: Int, location_start: String, location_end: String, from: Boolean)
+case class ChanceCreated(game_id: Long, team_id: Long, player_id: Long, time: String, location_start: String, location_end: String, from: Boolean)
 	/* from: open_play=1 ; set_play=0 */
 
 case class LongPass(game_id: Long, team_id: Long, player_id: Long, count: Int, success_count: Int, fail_count: Int, assist_count: Int, chances_created_count: Int)
 
 case class ShortPass(game_id: Long, team_id: Long, player_id: Long, count: Int, success_count: Int, fail_count: Int, assist_count: Int, chances_created_count: Int)
 
-case class Shot(game_id: Long, team_id: Long, player_id: Long, time: Int, location_start: String, location_end: String, from: Int, result: Int, from_set_play: Boolean, from_free_kick: Boolean, from_penalty: Boolean)
+case class Shot(game_id: Long, team_id: Long, player_id: Long, time: String, location_start: String, location_end: String, from: Int, result: Int, from_set_play: Boolean, from_free_kick: Boolean, from_penalty: Boolean)
 	/* from: right-foot=1 ; left-foot=2 ; header=3 ; other=4
 	   result: on-target=1 ; off-target=2 ; goal=3 ; blocked=4 */
 
-case class BallRecovery(game_id: Long, team_id: Long, player_id: Long, time: Int, location: String)
+case class BallRecovery(game_id: Long, team_id: Long, player_id: Long, time: String, location: String)
 	/* result: Success=1 ; Fail=0 */
 
 case class PassSummary(game_id: Long, team_id: Long, player_id: Long, received_count: Int, success_count: Int, fail_count: Int, assist_count: Int, chances_created_count: Int, free_kick_count: Int, long_count: Int, short_count: Int, offside_passes_count: Int, throw_ins_count: Int)
@@ -61,34 +61,38 @@ case class ShotSummary(game_id: Long, team_id: Long, player_id: Long, free_kick_
 
 case class OtherSummary(game_id: Long, player_id: Long, team_id: Long, corners_count: Int, crosses_count: Int, tackle_success_count: Int, tackle_fail_count: Int, interception_count: Int, block_count: Int, clearance_count: Int, headed_clearance_count: Int, aerial_duels_won_count: Int, aerial_duels_lost_count: Int, blocked_crosses_count: Int, error_leading_to_shot_count: Int, error_leading_to_goal_count: Int, fouls_commit_count: Int, fouls_suffer_count: Int, yellow_card_count: Int, red_card_count: Int, take_on_success_count: Int, take_on_fail_count: Int)
 
-case class FreekickShot(game_id: Long, team_id: Long, player_id: Long, time: Int, location_start: String, location_end: String, result: Int)
+case class FreekickShot(game_id: Long, team_id: Long, player_id: Long, time: String, location_start: String, location_end: String, result: Int)
 	/* result: on-target=1 ; off-target=2 ; goal=3 ; blocked=4 */
 
-case class Corner(game_id: Long, team_id: Long, player_id: Long, time: Int, location_start: String, location_end: String, result: Int)
+case class Corner(game_id: Long, team_id: Long, player_id: Long, time: String, location_start: String, location_end: String, result: Int)
 	/* result: success=1 ; fail=2 ; assist=3 ; chance created=4 */
 
-case class Tackle(game_id: Long, team_id: Long, player_id: Long, time: Int, location: String, result: Boolean)
+case class Tackle(game_id: Long, team_id: Long, player_id: Long, time: String, location: String, result: Boolean)
 	/* result: success=1 ; fail=0  */
 
-case class Cross(game_id: Long, team_id: Long, player_id: Long, time: Int, location_start: String, location_end: String, result: Int)
+case class Cross(game_id: Long, team_id: Long, player_id: Long, time: String, location_start: String, location_end: String, result: Int)
 	/* result: success=1 ; fail=2 ; assist=3 ; chance created=4 ; blocked=5  */
 
-case class AerialDuel(game_id: Long, team_id: Long, player_id: Long, time: Int, location: String, result: Boolean)
+case class AerialDuel(game_id: Long, team_id: Long, player_id: Long, time: String, location: String, result: Boolean)
 	/* result: success=1 ; fail=0  */
 
-case class Clearance(game_id: Long, team_id: Long, player_id: Long, time: Int, location: String, result: Boolean)
+case class Clearance(game_id: Long, team_id: Long, player_id: Long, time: String, location: String, result: Boolean)
 
-case class Interception(game_id: Long, team_id: Long, player_id: Long, time: Int, location: String)
+case class Interception(game_id: Long, team_id: Long, player_id: Long, time: String, location: String)
 
-case class Block(game_id: Long, team_id: Long, player_id: Long, time: Int, location: String)
+case class Block(game_id: Long, team_id: Long, player_id: Long, time: String, location: String)
 
-case class DefensiveError(game_id: Long, team_id: Long, player_id: Long, time: Int, location: String, leadingTo: Boolean)
+case class DefensiveError(game_id: Long, team_id: Long, player_id: Long, time: String, location: String, leadingTo: Boolean)
 	/* leadingTo: Goal=0 ; Shot=1 */
 
-case class Foul(game_id: Long, team_id: Long, player_id: Long, time: Int, location: String, how: Boolean)
+case class Foul(game_id: Long, team_id: Long, player_id: Long, time: String, location: String, how: Boolean)
 	/* how: Commit=1 ; Suffer=0 */
 
-case class BlockedCross(game_id: Long, team_id: Long, player_id: Long, time: Int, location: String)
+case class BlockedCross(game_id: Long, team_id: Long, player_id: Long, time: String, location: String)
+
+case class RedCard(game_id: Long, team_id: Long, player_id: Long, time: String)
+
+case class OffsidePass(game_id: Long, team_id: Long, player_id: Long, time: String, location_start: String, location_end: String)
 
 object Persistence {
   val dbURL: String = "jdbc:postgresql://localhost:5432/FFT_DATA?user=gsm&password=0909"
@@ -258,7 +262,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def result = column[Int]("RESULT")
 
@@ -282,7 +286,7 @@ object Persistence {
 
     def sub_out_player_id = column[Long]("SUB_OUT_PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def * = (game_id, team_id, sub_in_player_id, sub_out_player_id, time) <>(Substitution.tupled, Substitution.unapply)
 
@@ -304,7 +308,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location_start = column[String]("LOCATION_START")
 
@@ -330,7 +334,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location_start = column[String]("LOCATION_START")
 
@@ -360,7 +364,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location_start = column[String]("LOCATION_START")
 
@@ -384,7 +388,7 @@ object Persistence {
 
     def team_id = column[Long]("TEAM_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def formation = column[String]("FORMATION")
 
@@ -404,7 +408,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location = column[String]("LOCATION")
 
@@ -428,7 +432,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location_start = column[String]("LOCATION_START")
 
@@ -510,7 +514,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location_start = column[String]("LOCATION_START")
 
@@ -544,7 +548,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location = column[String]("LOCATION")
 
@@ -696,7 +700,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location_start = column[String]("LOCATION_START")
 
@@ -722,7 +726,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location_start = column[String]("LOCATION_START")
 
@@ -748,7 +752,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location = column[String]("LOCATION")
 
@@ -772,7 +776,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location_start = column[String]("LOCATION_START")
 
@@ -798,7 +802,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location = column[String]("LOCATION")
 
@@ -822,7 +826,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location = column[String]("LOCATION")
 
@@ -846,7 +850,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location = column[String]("LOCATION")
 
@@ -868,7 +872,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location = column[String]("LOCATION")
 
@@ -890,7 +894,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location = column[String]("LOCATION")
 
@@ -914,7 +918,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location = column[String]("LOCATION")
 
@@ -938,7 +942,7 @@ object Persistence {
 
     def player_id = column[Long]("PLAYER_ID")
 
-    def time = column[Int]("TIME")
+    def time = column[String]("TIME")
 
     def location = column[String]("LOCATION")
 
@@ -953,18 +957,66 @@ object Persistence {
 
   val blockedcrosses = TableQuery[BlockedCrosses]
 
+  class RedCards(tag: Tag) extends Table[RedCard](tag, "RED_CARDS") {
+
+    def game_id = column[Long]("GAME_ID")
+
+    def team_id = column[Long]("TEAM_ID")
+
+    def player_id = column[Long]("PLAYER_ID")
+
+    def time = column[String]("TIME")
+
+    def * = (game_id, team_id, player_id, time) <> (RedCard.tupled, RedCard.unapply)
+
+    def game = foreignKey("GAME_ID_FK", game_id, games)(_.id)
+
+    def team = foreignKey("TEAM_ID_FK", team_id, teams)(_.id)
+
+    def player = foreignKey("PLAYER_ID_FK", player_id, players)(_.id)
+
+  }
+
+  val redcards = TableQuery[RedCards]
+
+  class OffsidePasses(tag: Tag) extends Table[OffsidePass](tag, "OFFSIDE_PASSES") {
+
+    def game_id = column[Long]("GAME_ID")
+
+    def team_id = column[Long]("TEAM_ID")
+
+    def player_id = column[Long]("PLAYER_ID")
+
+    def time = column[String]("TIME")
+
+    def location_start = column[String]("LOCATION_START")
+
+    def location_end = column[String]("LOCATION_END")
+
+    def * = (game_id, team_id, player_id, time, location_start, location_end) <> (OffsidePass.tupled, OffsidePass.unapply)
+
+    def game = foreignKey("GAME_ID_FK", game_id, games)(_.id)
+
+    def team = foreignKey("TEAM_ID_FK", team_id, teams)(_.id)
+
+    def player = foreignKey("PLAYER_ID_FK", player_id, players)(_.id)
+
+  }
+
+  val offsidePasses = TableQuery[OffsidePasses]
+
   def createTables(): Unit = {
     Database.forURL(dbURL, driver = dbDriver) withSession { implicit session =>
       if(!MTable.getTables("LEAGUES").list.isEmpty) {
-        println("Tables already Created.")
+        //println("Tables already Created.")
         return
       }
 
-      println("Creating Tables");
+      //println("Creating Tables");
 
-      (leagues.ddl ++ teams.ddl ++ players.ddl ++ transfers.ddl ++ games.ddl ++ startingXIs.ddl ++ subs.ddl ++ penalties.ddl ++ substitutions.ddl ++ receivedpasses.ddl ++ passes.ddl ++ assists.ddl ++ formationchanges.ddl ++ takeons.ddl ++ chancescreated.ddl ++ longpasses.ddl ++ shortpasses.ddl ++ shots.ddl ++ ballrecoveries.ddl ++ passsummaries.ddl ++ shotsummaries.ddl ++ othersummaries.ddl ++ freekickshots.ddl ++ corners.ddl ++ tackles.ddl ++ crosses.ddl ++ aerialduels.ddl ++ clearances.ddl ++ interceptions.ddl ++ blocks.ddl ++ defensiveerrors.ddl ++ fouls.ddl ++ blockedcrosses.ddl).create
+      (leagues.ddl ++ teams.ddl ++ players.ddl ++ transfers.ddl ++ games.ddl ++ startingXIs.ddl ++ subs.ddl ++ penalties.ddl ++ substitutions.ddl ++ receivedpasses.ddl ++ passes.ddl ++ assists.ddl ++ formationchanges.ddl ++ takeons.ddl ++ chancescreated.ddl ++ longpasses.ddl ++ shortpasses.ddl ++ shots.ddl ++ ballrecoveries.ddl ++ passsummaries.ddl ++ shotsummaries.ddl ++ othersummaries.ddl ++ freekickshots.ddl ++ corners.ddl ++ tackles.ddl ++ crosses.ddl ++ aerialduels.ddl ++ clearances.ddl ++ interceptions.ddl ++ blocks.ddl ++ defensiveerrors.ddl ++ fouls.ddl ++ blockedcrosses.ddl ++ redcards.ddl ++ offsidePasses.ddl).create
 
-      println("Tables Created");
+      //println("Tables Created");
       session.close
     }
   }
@@ -984,6 +1036,7 @@ object Persistence {
         val league_id = getLeagueID()
         if (league_id == Int.int2long(-1)) {
           println("League " + Helper.getLeagueName(Helper.leagueID) + " not found. Error.")
+          session.close
           return false
         }
 
@@ -1005,7 +1058,7 @@ object Persistence {
         val team_id = getTeamID(teamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + teamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_row = for {
@@ -1015,11 +1068,11 @@ object Persistence {
         if (player_row.length.run == 0) {
           val player_id = (players returning players.map(_.id)) += Player(team_id, playerName.toLowerCase, playerID.toLong)
           transfers += Transfer(player_id, team_id, team_id, new Timestamp(date.getTime), new Timestamp(date.getTime))
-          println("Player " + playerName + " added.")
+          //println("Player " + playerName + " added.")
         }
         else {
           if (player_row.first._2 != team_id) {
-            println("Player " + playerName + " team updated from " + player_row.first._2 + " to " + team_id)
+            //println("Player " + playerName + " team updated from " + player_row.first._2 + " to " + team_id)
             player_row.update(player_row.first._1, team_id)
 
             val transfer_row = for {
@@ -1027,7 +1080,7 @@ object Persistence {
             } yield(t.team_to_id, t.date_to)
             if(transfer_row.length.run != 1) {
               println("Transfer Row Length not equal to 1. Error.")
-              return false
+              session.close; return false;
             }
             transfer_row.update(team_id, new Timestamp(date.getTime))
             transfers += Transfer(player_row.first._1, team_id, team_id, new Timestamp(date.getTime()), new Timestamp(date.getTime))
@@ -1049,13 +1102,13 @@ object Persistence {
         val away_team_id = getTeamID(away_team_name)
         if(home_team_id == Int.int2long(-1) || away_team_id == Int.int2long(-1)) {
           println("Home Team " + home_team_name + " or Away Team " + away_team_name + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val league_id = getLeagueID()
         if(league_id == Int.int2long(-1)) {
           println("League " + Helper.leagueID + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val game_id = getMatchID(FFT_match_id.toLong)
@@ -1069,6 +1122,8 @@ object Persistence {
     return true
   }
 
+
+
   def addStartingXIs(FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
     Database.forURL(dbURL, driver = dbDriver) withSession {
       implicit session =>
@@ -1076,19 +1131,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         startingXIs += StartingXI(game_id, team_id, player_id)
@@ -1104,23 +1159,71 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
+          session.close
           return false
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         subs += Sub(game_id, team_id, player_id)
         session.close
+    }
+    return true
+  }
+
+  def addRedCard(FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String, time: String): Boolean = {
+    Database.forURL(dbURL, driver = dbDriver) withSession {
+      implicit session =>
+        val game_id = getMatchID(FFTmatchID.toLong)
+        if (game_id == Int.int2long(-1)) {
+          println("Game " + FFTmatchID + " not found. Error.")
+          session.close;
+          return false;
+        }
+
+        val team_id = getTeamID(FFTteamName)
+        if (team_id == Int.int2long(-1)) {
+          println("Team " + FFTteamName + " not Found. Error.")
+          session.close;
+          return false;
+        }
+
+        val player_id = getPlayerID(FFTplayerID.toLong)
+        if (player_id == Int.int2long(-1)) {
+          println("Player " + FFTplayerID + " not found. Error.")
+          session.close;
+          return false;
+        }
+
+        redcards += RedCard(game_id, team_id, player_id, time)
+
+        val othersummaryRow = for {
+          o <- othersummaries if o.game_id === game_id && o.team_id === team_id && o.player_id === player_id
+        } yield (o.red_card_count)
+        if (othersummaryRow.length.run > 1) {
+          println("More than 1 Other Summary Found. Error.")
+          session.close
+          return false
+        }
+        else if (othersummaryRow.length.run == 1) {
+          othersummaryRow.update(1)
+        }
+        else if (othersummaryRow.length.run == 0) {
+          othersummaries += OtherSummary(game_id, team_id, player_id, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0)
+        }
+
+        session.close
+
     }
     return true
   }
@@ -1134,19 +1237,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to penaltys.size()) {
@@ -1161,9 +1264,15 @@ object Persistence {
             s <- shots if s.game_id === game_id && s.team_id === team_id && s.player_id === player_id && s.time === getTime(time) && s.location_start === location_start && s.location_end === location_end && s.result === result.toInt
           } yield(s.from_penalty)
 
-          if(shotsRow.length.run != 1) {
-            println("Shot not found to add Penalty information.")
-            println("GameID - " + game_id + " TeamID = " + team_id + " Player ID = " + player_id + " Time = " + time + " Location: " + location_start + " - " + location_end + " Result = " + result)
+          if(shotsRow.length.run > 1) {
+            println("More than 1 Shots Row found in addPenalties. Some Error.")
+            session.close
+            return false
+          }
+          else if(shotsRow.length.run < 1) {
+            //println("Shot not found to add Penalty information. Adding Shot Information.")
+            //println("GameID - " + game_id + " TeamID = " + team_id + " Player ID = " + player_id + " Time = " + time + " Location: " + location_start + " - " + location_end + " Result = " + result)
+            shots += Shot(game_id, team_id, player_id, getTime(time), location_start, location_end, -1, result.toInt, false, false, true)
           }
           else
             shotsRow.update(true)
@@ -1180,6 +1289,7 @@ object Persistence {
         } yield (s.penalty_missed_count, s.penalty_scored_count)
         if (shotsummaryRow.length.run > 1) {
           println("More than 1 Shot Summary Found. Error.")
+          session.close
           return false
         }
         else if (shotsummaryRow.length.run == 1) {
@@ -1201,19 +1311,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to fkShots.size()) {
@@ -1229,9 +1339,15 @@ object Persistence {
             s <- shots if s.game_id === game_id && s.team_id === team_id && s.player_id === player_id && s.time === getTime(time) && s.location_start === location_start && s.location_end === location_end && s.result === result.toInt
           } yield(s.from_free_kick)
 
-          if(shotsRow.length.run != 1) {
-            println("Shot not found to add Free Kick information.")
-            println("GameID - " + game_id + " TeamID = " + team_id + " Player ID = " + player_id + " Time = " + time + " Location: " + location_start + " - " + location_end + " Result = " + result)
+          if(shotsRow.length.run > 1) {
+            println("Inside addFKSHots. " + shotsRow.length.run + " Shots Row found. Some error. Details.")
+            println("Game ID = " + game_id + " Team ID = " + team_id + " Player ID = " + player_id + " Time = " + time + " Location Start = " + location_start + " End = " + location_end + " Result = " + result)
+            session.close; return false;
+          }
+          else if(shotsRow.length.run < 1) {
+            //println("Shot not found to add Free Kick information. Adding Shot.")
+            //println("GameID - " + game_id + " TeamID = " + team_id + " Player ID = " + player_id + " Time = " + time + " Location: " + location_start + " - " + location_end + " Result = " + result)
+            shots += Shot(game_id, team_id, player_id, getTime(time), location_start, location_end, -1, result.toInt, false, true, false)
           }
           else
             shotsRow.update(true)
@@ -1244,7 +1360,7 @@ object Persistence {
         } yield (s.free_kick_count)
         if (shotsummaryRow.length.run > 1) {
           println("More than 1 Shot Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (shotsummaryRow.length.run == 1) {
           shotsummaryRow.update(count)
@@ -1271,19 +1387,19 @@ object Persistence {
         } yield (g.id, g.shots, g.home_team_id, g.away_team_id)
         if (gameRow.length.run != 1) {
           println("Error retrieving Game Details for Game#" + FFTmatchID)
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to shotss.size()) {
@@ -1302,9 +1418,24 @@ object Persistence {
               s <- shots if s.game_id === gameRow.first._1 && s.team_id === team_id && s.player_id === player_id && s.time === getTime(time) && s.location_start === location_start && s.location_end === location_end && s.result === result.toInt
             } yield(s.from_set_play)
 
-            if(shotsRow.length.run != 1) {
-              println("Shot Details not found to add set_play information to. Details - ")
-              println("GameID = " + gameRow.first._1 + " TeamID = " + team_id + " PlayerID = " + player_id + " Time - " + time + " Location From-To = " + location_start + " - " + location_end + " Result = " + result)
+            if(shotsRow.length.run > 1) {
+              println("Inside addShots. More than 1 ShotsRow found. Error.")
+              session.close; return false;
+            }
+            else if(shotsRow.length.run < 1) {
+              shots_total = shots_total + 1
+              if (result.toInt == 3) {
+                goals_count = goals_count + 1
+                shots_on_target = shots_on_target + 1
+              }
+              else if (result.toInt == 1)
+                shots_on_target = shots_on_target + 1
+              else if (result.toInt == 4)
+                shots_blocked_count = shots_blocked_count + 1
+
+              //println("Shot Details not found to add set_play information to. Adding Shots Row. Details - ")
+              //println("GameID = " + gameRow.first._1 + " TeamID = " + team_id + " PlayerID = " + player_id + " Time - " + time + " Location From-To = " + location_start + " - " + location_end + " Result = " + result)
+              shots += Shot(gameRow.first._1, team_id, player_id, getTime(time), location_start, location_end, -1, result.toInt, true, false, false)
               //return false
             }
             else
@@ -1328,10 +1459,10 @@ object Persistence {
         } yield (s.goal_count, s.shots_count, s.shots_on_target_count, s.shots_blocked_count)
         if (shotsummaryRow.length.run > 1) {
           println("More than 1 Shot Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (shotsummaryRow.length.run == 1) {
-          shotsummaryRow.update(goals_count, shots_total, shots_on_target, shots_blocked_count)
+          shotsummaryRow.update(shotsummaryRow.first._1 + goals_count, shotsummaryRow.first._2 + shots_total, shotsummaryRow.first._3 + shots_on_target, shotsummaryRow.first._4 + shots_blocked_count)
         }
         else if (shotsummaryRow.length.run == 0) {
           shotsummaries += ShotSummary(gameRow.first._1, team_id, player_id, 0, 0, 0, 0, 0, goals_count, shots_total, shots_on_target, shots_blocked_count)
@@ -1354,7 +1485,7 @@ object Persistence {
         }
         else {
           println("Strange Error - 1")
-          return false
+          session.close; return false;
         }
         session.close
     }
@@ -1368,23 +1499,24 @@ object Persistence {
         var passes_total: Int = 0
         var passes_success: Int = 0
         var passes_fail: Int = 0
+        var fk_passes: Int = 0
 
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to passs.size()) {
@@ -1398,13 +1530,23 @@ object Persistence {
           val third: String = st.nextToken()
 
           if(third.toInt == 4) {
+            fk_passes = fk_passes + 1
             val passRow = for {
               p <- passes if p.game_id === game_id && p.team_id === team_id && p.player_id === player_id && p.time === getTime(time) && p.location_start === location_start && p.location_end === location_end && p.result === result.toInt
             } yield(p.free_kick)
 
-            if(passRow.length.run != 1) {
-              println("Free Kick Pass not found. Game Details - ")
-              println("Game ID - " + game_id + " Team_ID = " + team_id + " Player_ID = " + player_id + " Time = " + time + " From-To = " + location_start + " - " + location_end + " Result - " + result)
+            if(passRow.length.run > 1) {
+              println("Inside addPasses. More than 1 Passrow found. Error.")
+              session.close; return false;
+            }
+            else if(passRow.length.run < 1) {
+              if (result.toInt == 2)
+                passes_fail = passes_fail + 1
+              else if (result.toInt == 1 || result.toInt == 3 || result.toInt == 4)
+                passes_success = passes_success + 1
+              //println("Free Kick Pass not found. Adding pass. Game Details - ")
+              //println("Game ID - " + game_id + " Team_ID = " + team_id + " Player_ID = " + player_id + " Time = " + time + " From-To = " + location_start + " - " + location_end + " Result - " + result)
+              passes += Pass(game_id, team_id, player_id, getTime(time), location_start, location_end, result.toInt, -1, true)
             }
             else
               passRow.update(true)
@@ -1420,16 +1562,16 @@ object Persistence {
 
         val passsummaryRow = for {
           p <- passsummaries if p.game_id === game_id && p.team_id === team_id && p.player_id === player_id
-        } yield (p.success_count, p.fail_count)
+        } yield (p.success_count, p.fail_count, p.free_kick_count)
         if (passsummaryRow.length.run > 1) {
           println("More than 1 Pass Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (passsummaryRow.length.run == 1) {
-          passsummaryRow.update(passes_success, passes_fail)
+          passsummaryRow.update(passsummaryRow.first._1 + passes_success, passsummaryRow.first._2 + passes_fail, passsummaryRow.first._3 + fk_passes)
         }
         else if (passsummaryRow.length.run == 0) {
-          passsummaries += PassSummary(game_id, team_id, player_id, 0, passes_success, passes_fail, 0, 0, 0, 0, 0, 0, 0)
+          passsummaries += PassSummary(game_id, team_id, player_id, 0, passes_success, passes_fail, 0, 0, fk_passes, 0, 0, 0, 0)
         }
         session.close
     }
@@ -1445,19 +1587,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to passs.size()) {
@@ -1477,7 +1619,7 @@ object Persistence {
         } yield (p.received_count)
         if (passsummaryRow.length.run > 1) {
           println("More than 1 Pass Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (passsummaryRow.length.run == 1) {
           passsummaryRow.update(received_total)
@@ -1499,19 +1641,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to assistss.size()) {
@@ -1530,10 +1672,10 @@ object Persistence {
         } yield (p.assist_count)
         if (passsummaryRow.length.run > 1) {
           println("More than 1 Pass Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (passsummaryRow.length.run == 1) {
-          passsummaryRow.update(assists_total)
+          passsummaryRow.update(passsummaryRow.first + assists_total)
         }
         else if (passsummaryRow.length.run == 0) {
           passsummaries += PassSummary(game_id, team_id, player_id, 0, 0, 0, assists_total, 0, 0, 0, 0, 0, 0)
@@ -1552,19 +1694,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to chances.size()) {
@@ -1583,10 +1725,10 @@ object Persistence {
         } yield (p.chances_created_count)
         if (passsummaryRow.length.run > 1) {
           println("More than 1 Pass Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (passsummaryRow.length.run == 1) {
-          passsummaryRow.update(chances_total)
+          passsummaryRow.update(passsummaryRow.first + chances_total)
         }
         else if (passsummaryRow.length.run == 0) {
           passsummaries += PassSummary(game_id, team_id, player_id, 0, 0, 0, 0, chances_total, 0, 0, 0, 0, 0)
@@ -1600,24 +1742,23 @@ object Persistence {
 
     Database.forURL(dbURL, driver = dbDriver) withSession {
       implicit session =>
-        var chances_total: Int = 0
 
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val st: StringTokenizer = new StringTokenizer(longpassess, ";;")
@@ -1634,7 +1775,7 @@ object Persistence {
         } yield (p.long_count)
         if (passsummaryRow.length.run > 1) {
           println("More than 1 Pass Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (passsummaryRow.length.run == 1) {
           passsummaryRow.update(count)
@@ -1656,19 +1797,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val st: StringTokenizer = new StringTokenizer(shortpassess, ";;")
@@ -1685,7 +1826,7 @@ object Persistence {
         } yield (p.short_count)
         if (passsummaryRow.length.run > 1) {
           println("More than 1 Pass Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (passsummaryRow.length.run == 1) {
           passsummaryRow.update(count)
@@ -1707,19 +1848,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to crossess.size()) {
@@ -1738,7 +1879,7 @@ object Persistence {
         } yield (o.crosses_count)
         if (othersummaryRow.length.run > 1) {
           println("More than 1 Other Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (othersummaryRow.length.run == 1) {
           othersummaryRow.update(crosses_total)
@@ -1763,19 +1904,19 @@ object Persistence {
         } yield (g.id, g.dribbles, g.home_team_id, g.away_team_id)
         if (gameRow.length.run != 1) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to takeonss.size()) {
@@ -1795,7 +1936,7 @@ object Persistence {
         } yield (o.take_on_success_count, o.take_on_fail_count)
         if (othersummaryRow.length.run > 1) {
           println("More than 1 Other Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (othersummaryRow.length.run == 1) {
           othersummaryRow.update(success_count, fail_count)
@@ -1820,7 +1961,7 @@ object Persistence {
         }
         else {
           println("Strange Error - 2")
-          return false
+          session.close; return false;
         }
         session.close
     }
@@ -1838,24 +1979,24 @@ object Persistence {
         } yield (g.id, g.corners, g.home_team_id, g.away_team_id)
         if (gameRow.length.run != 1) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to cornerss.size()) {
           count = count + 1
-          var temp: String = cornerss.get(i - 1)
+          val temp: String = cornerss.get(i - 1)
           val st: StringTokenizer = new StringTokenizer(temp, ";;")
           val time: String = st.nextToken()
           val location_start: String = st.nextToken()
@@ -1869,7 +2010,7 @@ object Persistence {
         } yield (o.corners_count)
         if (othersummaryRow.length.run > 1) {
           println("More than 1 Other Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (othersummaryRow.length.run == 1) {
           othersummaryRow.update(count)
@@ -1891,37 +2032,47 @@ object Persistence {
         }
         else {
           println("Strange Error - 3")
-          return false
+          session.close; return false;
         }
         session.close
     }
     return true
   }
 
-  def addOffsidePasses(offsidePasses: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
+  def addOffsidePasses(offsidePassess: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
     Database.forURL(dbURL, driver = dbDriver) withSession {
       implicit session =>
-        var count: Int = 0
+        val count: Int = offsidePassess.size
 
         val gameRow = for {
           g <- games if g.FFT_ID === FFTmatchID.toLong && g.season === season.toInt
         } yield (g.id, g.offsides, g.home_team_id, g.away_team_id)
         if (gameRow.length.run != 1) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
+        }
+
+        for (i <- 1 to offsidePassess.size()) {
+          var temp: String = offsidePassess.get(i - 1)
+          val st: StringTokenizer = new StringTokenizer(temp, ";;")
+          val time: String = st.nextToken()
+          val location_start: String = st.nextToken()
+          val location_end: String = st.nextToken()
+
+          offsidePasses += OffsidePass(gameRow.first._1, team_id, player_id, time, location_start, location_end)
         }
 
         val passsummaryRow = for {
@@ -1929,7 +2080,7 @@ object Persistence {
         } yield (p.offside_passes_count)
         if (passsummaryRow.length.run > 1) {
           println("More than 1 Pass Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (passsummaryRow.length.run == 1) {
           passsummaryRow.update(count)
@@ -1951,7 +2102,7 @@ object Persistence {
         }
         else {
           println("Strange Error - 4")
-          return false
+          session.close; return false;
         }
         session.close
     }
@@ -1967,19 +2118,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to ballRecoveriess.size()) {
@@ -2008,19 +2159,19 @@ object Persistence {
         } yield (g.id, g.tackles, g.home_team_id, g.away_team_id)
         if (gameRow.length.run != 1) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to tackless.size()) {
@@ -2042,7 +2193,7 @@ object Persistence {
         } yield (o.tackle_success_count, o.tackle_fail_count)
         if (othersummaryRow.length.run > 1) {
           println("More than 1 Other Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (othersummaryRow.length.run == 1) {
           othersummaryRow.update(success_count, fail_count)
@@ -2068,7 +2219,7 @@ object Persistence {
         }
         else {
           println("Strange Error - 5")
-          return false
+          session.close; return false;
         }
         session.close
     }
@@ -2084,19 +2235,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to interceptionss.size()) {
@@ -2114,7 +2265,7 @@ object Persistence {
         } yield (o.interception_count)
         if (othersummaryRow.length.run > 1) {
           println("More than 1 Other Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (othersummaryRow.length.run == 1) {
           othersummaryRow.update(count)
@@ -2136,19 +2287,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to blockss.size()) {
@@ -2166,7 +2317,7 @@ object Persistence {
         } yield (o.block_count)
         if (othersummaryRow.length.run > 1) {
           println("More than 1 Other Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (othersummaryRow.length.run == 1) {
           othersummaryRow.update(count)
@@ -2188,19 +2339,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to clearancess.size()) {
@@ -2219,7 +2370,7 @@ object Persistence {
         } yield (o.clearance_count)
         if (othersummaryRow.length.run > 1) {
           println("More than 1 Other Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (othersummaryRow.length.run == 1) {
           othersummaryRow.update(count)
@@ -2244,19 +2395,19 @@ object Persistence {
         } yield (g.id, g.aerial_duels, g.home_team_id, g.away_team_id)
         if (gameRow.length.run != 1) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to aerialDuelss.size()) {
@@ -2278,7 +2429,7 @@ object Persistence {
         } yield (o.aerial_duels_won_count, o.aerial_duels_lost_count)
         if (othersummaryRow.length.run > 1) {
           println("More than 1 Other Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (othersummaryRow.length.run == 1) {
           othersummaryRow.update(won_count, lost_count)
@@ -2304,7 +2455,7 @@ object Persistence {
         }
         else {
           println("Strange Error - 6")
-          return false
+          session.close; return false;
         }
         session.close
     }
@@ -2320,19 +2471,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to blockedCrossess.size()) {
@@ -2350,7 +2501,7 @@ object Persistence {
         } yield (o.blocked_crosses_count)
         if (othersummaryRow.length.run > 1) {
           println("More than 1 Other Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (othersummaryRow.length.run == 1) {
           othersummaryRow.update(count)
@@ -2373,19 +2524,19 @@ object Persistence {
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to defensiveErrorss.size()) {
@@ -2407,10 +2558,10 @@ object Persistence {
         } yield (o.error_leading_to_shot_count, o.error_leading_to_goal_count)
         if (othersummaryRow.length.run > 1) {
           println("More than 1 Other Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (othersummaryRow.length.run == 1) {
-          othersummaryRow.update(shot_count, goal_count)
+          othersummaryRow.update(othersummaryRow.first._1 + shot_count, othersummaryRow.first._2 + goal_count)
         }
         else if (othersummaryRow.length.run == 0) {
           othersummaries += OtherSummary(game_id, team_id, player_id, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, shot_count, goal_count, 0, 0, 0, 0, 0, 0)
@@ -2432,19 +2583,19 @@ object Persistence {
         } yield (g.id, g.fouls, g.home_team_id, g.away_team_id)
         if (gameRow.length.run != 1) {
           println("Game " + FFTmatchID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         val team_id = getTeamID(FFTteamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + FFTteamName + " not Found. Error.")
-          return false
+          session.close; return false;
         }
 
         val player_id = getPlayerID(FFTplayerID.toLong)
         if (player_id == Int.int2long(-1)) {
           println("Player " + FFTplayerID + " not found. Error.")
-          return false
+          session.close; return false;
         }
 
         for (i <- 1 to foulss.size()) {
@@ -2466,10 +2617,10 @@ object Persistence {
         } yield (o.fouls_commit_count, o.fouls_suffer_count)
         if (othersummaryRow.length.run > 1) {
           println("More than 1 Other Summary Found. Error.")
-          return false
+          session.close; return false;
         }
         else if (othersummaryRow.length.run == 1) {
-          othersummaryRow.update(commit_count, suffer_count)
+          othersummaryRow.update(othersummaryRow.first._1 + commit_count, othersummaryRow.first._2 + suffer_count)
         }
         else if (othersummaryRow.length.run == 0) {
           othersummaries += OtherSummary(gameRow.first._1, team_id, player_id, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, commit_count, suffer_count, 0, 0, 0, 0)
@@ -2488,15 +2639,16 @@ object Persistence {
         }
         else {
           println("Strange Error - 7")
-          return false
+          session.close; return false;
         }
         session.close
     }
     return true
   }
 
-  def getTime(time: String): Int = {
-    return time.split("-")(1).trim.toInt
+  def getTime(time: String): String = {
+    return time
+    //return time.split("-")(1).trim.toInt
   }
 
   def getBoolean(result: String): Boolean = {
@@ -2584,7 +2736,7 @@ object Persistence {
           return false
         }
 
-        substitutions += Substitution(game_id, team_id, sub_in, sub_out, 0)
+        substitutions += Substitution(game_id, team_id, sub_in, sub_out, "")
         session.close
     }
     return true
@@ -2711,6 +2863,14 @@ object Persistence {
           a <- takeons if a.game_id === matchID
         } yield (a)
         toRow.delete
+        val rcRow = for {
+          r <- redcards if r.game_id === matchID
+        } yield(r)
+        rcRow.delete
+        val opRow = for {
+          o <- offsidePasses if o.game_id === matchID
+        } yield(o)
+        opRow.delete
         val gaRow = for {
           a <- games if a.id === matchID
         } yield (a)
