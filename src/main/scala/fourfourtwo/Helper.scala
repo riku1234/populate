@@ -3,7 +3,7 @@ package fourfourtwo
 import java.util.Locale
 
 object Helper {
-	//var leagueID: Long = -1
+	var leagueID: Long = -1
 
 	def getPlayerStatsPage(gamePage: String): String = {
 		val playerStatsPageAppend: String = "/player-stats#tabs-wrapper-anchor"
