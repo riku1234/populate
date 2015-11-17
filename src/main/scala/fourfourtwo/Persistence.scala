@@ -1021,30 +1021,37 @@ object Persistence {
     }
   }
 
-  def addLeague() = {
+  def addLeague(FFTLeagueID: Long) = {
     Database.forURL(dbURL, driver = dbDriver) withSession {
       implicit session =>
-        if(getLeagueID() == Int.int2long(-1))
-          leagues += League(Helper.getLeagueName(Helper.leagueID), Helper.leagueID)
+        if(getLeagueID(FFTLeagueID) == Int.int2long(-1))
+          leagues += League(Helper.getLeagueName(FFTLeagueID), FFTLeagueID)
         session.close
     }
   }
 
-  def addTeam(teamName: String): Boolean = {
+  def addTeam(teamName: String, FFTLeagueID: Long, category: Int): Boolean = {
     Database.forURL(dbURL, driver = dbDriver) withSession {
       implicit session =>
-        val league_id = getLeagueID()
+        var league_id = getLeagueID(FFTLeagueID)
         if (league_id == Int.int2long(-1)) {
-          println("League " + Helper.getLeagueName(Helper.leagueID) + " not found. Error.")
+          println("League " + Helper.getLeagueName(FFTLeagueID) + " not found. Error.")
           session.close
           return false
         }
+        if(category != Helper.LEAGUE)
+          league_id = -1
 
-        val teamID = getTeamID(teamName)
-        if (teamID == Int.int2long(-1)) {
+        val team_row = for {
+          t <- teams if t.name === teamName.toLowerCase
+        } yield(t.league_id)
+
+        if (team_row.length.run == 0) {
           teams += Team(teamName.toLowerCase, league_id)
           println("Team " + teamName + " added. ")
         }
+        else if(team_row.first == Int.int2long(-1))
+          team_row.update(league_id)
 
         session.close
     }
@@ -1091,10 +1098,12 @@ object Persistence {
     return true
   }
 
-  def addMatch(stadium: String, date: java.util.Date, home_team_name: String, away_team_name: String, full_time_score: String, FFT_match_id: String, season: String, home_possession: Double, away_possession: Double): Boolean = {
-    if(!addTeam(home_team_name))
+  def addMatch(stadium: String, date: java.util.Date, FFTLeagueID: Long, home_team_name: String, away_team_name: String, full_time_score: String, FFT_match_id: String, season: String, home_possession: Double, away_possession: Double): Boolean = {
+    val category = Helper.category(FFTLeagueID)
+
+    if(!addTeam(home_team_name, FFTLeagueID, category))
       return false
-    if(!addTeam(away_team_name))
+    if(!addTeam(away_team_name, FFTLeagueID, category))
       return false
     Database.forURL(dbURL, driver = dbDriver) withSession {
       implicit session =>
@@ -1105,9 +1114,9 @@ object Persistence {
           session.close; return false;
         }
 
-        val league_id = getLeagueID()
+        val league_id = getLeagueID(FFTLeagueID)
         if(league_id == Int.int2long(-1)) {
-          println("League " + Helper.leagueID + " not Found. Error.")
+          println("League " + FFTLeagueID + " not Found. Error.")
           session.close; return false;
         }
 
@@ -2655,9 +2664,9 @@ object Persistence {
     return (if (result.toInt == 0) false else true)
   }
 
-  def getLeagueID()(implicit session: Session): Long = {
+  def getLeagueID(FFT_League_ID: Long)(implicit session: Session): Long = {
     val league_row = for {
-      l <- leagues if l.FFT_ID === Helper.leagueID && l.name === Helper.getLeagueName(Helper.leagueID)
+      l <- leagues if l.FFT_ID === FFT_League_ID && l.name === Helper.getLeagueName(FFT_League_ID)
     } yield(l.id)
 
     return if(league_row.length.run == 1) league_row.first else Int.int2long(-1)

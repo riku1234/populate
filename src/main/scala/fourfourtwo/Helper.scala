@@ -3,15 +3,14 @@ package fourfourtwo
 import java.util.Locale
 
 object Helper {
-	var leagueID: Long = -1
 
-	def getPlayerStatsPage(gamePage: String): String = {
-		val playerStatsPageAppend: String = "/player-stats#tabs-wrapper-anchor"
-		return (gamePage + playerStatsPageAppend)	
-	}
+  val LEAGUE = 0
+  val CHAMPIONS_LEAGUE = 1
+  val DOMESTIC_CUP = 2
 
   def getLocale(leagueID: Long): Locale = {
     leagueID match {
+      case 5 => return Locale.ENGLISH
       case 8 => return Locale.ENGLISH
 			case 21 => return Locale.ENGLISH
       case 22 => return Locale.ENGLISH
@@ -22,12 +21,9 @@ object Helper {
     }
   }
 
-  def setLeagueID(id: Long): Unit = {
-    leagueID = id
-  }
-
-	def getLeagueName(leagueID: Long): String = {
+  def getLeagueName(leagueID: Long): String = {
 		leagueID match {
+      case 5 => return "UEFA Champions League"
 			case 8 => return "Premier League"
 			case 21 => return "Serie A"
       case 22 => return "Bundesliga"
@@ -37,5 +33,16 @@ object Helper {
         return ""
 		}
 	}
+
+  def category(leagueID: Long): Int = {
+    leagueID match {
+      case 5 => return CHAMPIONS_LEAGUE
+      case 8 => return LEAGUE
+      case 21 => return LEAGUE
+      case 22 => return LEAGUE
+      case 23 => return LEAGUE
+      case 24 => return LEAGUE
+    }
+  }
 
 }
