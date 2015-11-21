@@ -1015,7 +1015,7 @@ object Persistence {
       //println("Creating Tables");
 
       (leagues.ddl ++ teams.ddl ++ players.ddl ++ transfers.ddl ++ games.ddl ++ startingXIs.ddl ++ subs.ddl ++ penalties.ddl ++ substitutions.ddl ++ receivedpasses.ddl ++ passes.ddl ++ assists.ddl ++ formationchanges.ddl ++ takeons.ddl ++ chancescreated.ddl ++ longpasses.ddl ++ shortpasses.ddl ++ shots.ddl ++ ballrecoveries.ddl ++ passsummaries.ddl ++ shotsummaries.ddl ++ othersummaries.ddl ++ freekickshots.ddl ++ corners.ddl ++ tackles.ddl ++ crosses.ddl ++ aerialduels.ddl ++ clearances.ddl ++ interceptions.ddl ++ blocks.ddl ++ defensiveerrors.ddl ++ fouls.ddl ++ blockedcrosses.ddl ++ redcards.ddl ++ offsidePasses.ddl).create
-
+      leagues += League("Dummy", Helper.DUMMY_LEAGUE_ID) // Dummy League to accomodate special use-case
       //println("Tables Created");
       session.close
     }
@@ -1040,7 +1040,7 @@ object Persistence {
           return false
         }
         if(category != Helper.LEAGUE)
-          league_id = -1
+          league_id = Helper.DUMMY_LEAGUE_ID
 
         val team_row = for {
           t <- teams if t.name === teamName.toLowerCase
@@ -1050,7 +1050,7 @@ object Persistence {
           teams += Team(teamName.toLowerCase, league_id)
           println("Team " + teamName + " added. ")
         }
-        else if(team_row.first == Int.int2long(-1))
+        else if(team_row.first == Helper.DUMMY_LEAGUE_ID)
           team_row.update(league_id)
 
         session.close
