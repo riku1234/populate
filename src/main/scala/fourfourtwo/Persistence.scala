@@ -1062,6 +1062,7 @@ object Persistence {
     Database.forURL(dbURL, driver = dbDriver) withSession {
       implicit session =>
 
+        val timestamp = new Timestamp(date.getTime)
         val team_id = getTeamID(teamName)
         if (team_id == Int.int2long(-1)) {
           println("Team " + teamName + " not Found. Error.")
@@ -1079,6 +1080,14 @@ object Persistence {
         }
         else {
           if (player_row.first._2 != team_id) {
+            val transfer_row_check = for {
+              t <- transfers if t.player_id === player_row.first._1 && t.team_from_id === team_id && t.team_to_id === player_row.first._2
+            } yield(t.date_to)
+
+            if(transfer_row_check.length.run != 0) {
+              transfer_row_check.foreach((time) => if(time.after(timestamp)) return true)
+            }
+
             //println("Player " + playerName + " team updated from " + player_row.first._2 + " to " + team_id)
             player_row.update(player_row.first._1, team_id)
 
@@ -1090,7 +1099,7 @@ object Persistence {
               session.close; return false;
             }
             transfer_row.update(team_id, new Timestamp(date.getTime))
-            transfers += Transfer(player_row.first._1, team_id, team_id, new Timestamp(date.getTime()), new Timestamp(date.getTime))
+            transfers += Transfer(player_row.first._1, team_id, team_id, timestamp, new Timestamp(date.getTime))
           }
         }
         session.close
