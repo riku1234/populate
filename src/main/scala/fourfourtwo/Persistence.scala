@@ -1040,7 +1040,7 @@ object Persistence {
           return false
         }
         if(category != Helper.LEAGUE)
-          league_id = Helper.DUMMY_LEAGUE_ID
+          league_id = getLeagueID(Helper.DUMMY_LEAGUE_ID)
 
         val team_row = for {
           t <- teams if t.name === teamName.toLowerCase
@@ -1050,7 +1050,7 @@ object Persistence {
           teams += Team(teamName.toLowerCase, league_id)
           println("Team " + teamName + " added. ")
         }
-        else if(team_row.first == Helper.DUMMY_LEAGUE_ID)
+        else if(team_row.first == getLeagueID(Helper.DUMMY_LEAGUE_ID))
           team_row.update(league_id)
 
         session.close
