@@ -83,8 +83,6 @@ case class RedCard(game_id: Long, team_id: Long, player_id: Long, time: String)
 case class OffsidePass(game_id: Long, team_id: Long, player_id: Long, time: String, location_start: String, location_end: String)
 
 object Persistence {
-  val dbURL: String = "jdbc:postgresql://localhost:5432/FFT_DATA?user=gsm&password=0909"
-  val dbDriver: String = "org.postgresql.Driver"
 
   class Leagues(tag: Tag) extends Table[League](tag, "LEAGUES") {
 
@@ -753,7 +751,7 @@ object Persistence {
   val offsidePasses = TableQuery[OffsidePasses]
 
   def createTables(): Unit = {
-    Database.forURL(dbURL, driver = dbDriver) withSession { implicit session =>
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession { implicit session =>
       if(!MTable.getTables("LEAGUES").list.isEmpty) {
         //println("Tables already Created.")
         return
@@ -769,7 +767,7 @@ object Persistence {
   }
 
   def addLeague(FFTLeagueID: Long) = {
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         if(getLeagueID(FFTLeagueID) == Int.int2long(-1))
           leagues += League(Helper.getLeagueName(FFTLeagueID), FFTLeagueID)
@@ -778,7 +776,7 @@ object Persistence {
   }
 
   def addTeam(teamName: String, FFTLeagueID: Long, category: Int): Boolean = {
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         var league_id = getLeagueID(FFTLeagueID)
         if (league_id == Int.int2long(-1)) {
@@ -806,7 +804,7 @@ object Persistence {
   }
 
   def addPlayer(teamName: String, playerName: String, playerID: String, FFTmatchID: String, date: java.util.Date): Boolean = {
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val timestamp = new Timestamp(date.getTime)
@@ -836,7 +834,7 @@ object Persistence {
       return false
     if(!addTeam(away_team_name, FFTLeagueID, category))
       return false
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         val home_team_id = getTeamID(home_team_name)
         val away_team_id = getTeamID(away_team_name)
@@ -865,7 +863,7 @@ object Persistence {
 
 
   def addStartingXIs(FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -893,7 +891,7 @@ object Persistence {
   }
 
   def addSUBs(FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -922,7 +920,7 @@ object Persistence {
   }
 
   def addRedCard(FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String, time: String): Boolean = {
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
@@ -954,7 +952,7 @@ object Persistence {
   }
 
   def addPenalties(penaltys: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
@@ -991,7 +989,7 @@ object Persistence {
   }
 
   def addFKShots(fkShots: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         var count: Int = 0
 
@@ -1032,7 +1030,7 @@ object Persistence {
 
   def addShots(shotss: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
     //println("Inside addShots")
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         val game_id = getMatchID(FFTmatchID.toLong)
         if(game_id == Int.int2long(-1)) {
@@ -1078,7 +1076,7 @@ object Persistence {
 
   def addPasses(passs: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
@@ -1122,7 +1120,7 @@ object Persistence {
 
   def addReceivedPasses(passs: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1162,7 +1160,7 @@ object Persistence {
 
   def addAssists(assistss: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1201,7 +1199,7 @@ object Persistence {
 
   def addChancesCreated(chances: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1240,7 +1238,7 @@ object Persistence {
 
   def addCrosses(crossess: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1279,7 +1277,7 @@ object Persistence {
 
   def addTakeOns(takeonss: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         val game_id = getMatchID(FFTmatchID.toLong)
         if (game_id == Int.int2long(-1)) {
@@ -1315,7 +1313,7 @@ object Persistence {
 
   def addCorners(cornerss: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1354,7 +1352,7 @@ object Persistence {
 
   def addOffsidePasses(offsidePassess: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1392,7 +1390,7 @@ object Persistence {
 
   def addBallRecoveries(ballRecoveriess: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1428,7 +1426,7 @@ object Persistence {
 
   def addTackles(tackless: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1466,7 +1464,7 @@ object Persistence {
 
   def addInterceptions(interceptionss: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1503,7 +1501,7 @@ object Persistence {
 
   def addBlocks(blockss: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1540,7 +1538,7 @@ object Persistence {
 
   def addClearances(clearancess: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1578,7 +1576,7 @@ object Persistence {
 
   def addAerialDuels(aerialDuelss: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1616,7 +1614,7 @@ object Persistence {
 
   def addBlockedCrosses(blockedCrossess: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1653,7 +1651,7 @@ object Persistence {
 
   def addDefensiveErrors(defensiveErrorss: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1691,7 +1689,7 @@ object Persistence {
 
   def addFouls(foulss: util.ArrayList[String], FFTmatchID: String, FFTteamName: String, FFTplayerID: String, season: String): Boolean = {
 
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
 
         val game_id = getMatchID(FFTmatchID.toLong)
@@ -1728,7 +1726,7 @@ object Persistence {
   }
 
   def addSubstitutions(FFT_match_id: String, sub_in_id: String, sub_out_id: String): Boolean = {
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         val game_id = getMatchID(FFT_match_id.toLong)
         val sub_in = getPlayerID(sub_in_id.toLong)
@@ -1787,7 +1785,7 @@ object Persistence {
   }
 
   def gameExists(FFT_match_id: String): Boolean = {
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         val game_row = for {
           g <- games if g.FFT_ID === FFT_match_id.toLong
@@ -1801,7 +1799,7 @@ object Persistence {
   }
 
   def gameSaved(FFT_match_id: String): Boolean = {
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         val game_row = for {
           g <- games if g.FFT_ID === FFT_match_id.toLong
@@ -1820,7 +1818,7 @@ object Persistence {
   }
 
   def deleteMatch(FFTmatchID: String): Unit = {
-    Database.forURL(dbURL, driver = dbDriver) withSession {
+    Database.forURL(Helper.dbURL, driver = Helper.dbDriver) withSession {
       implicit session =>
         val matchID = getMatchID(FFTmatchID.toLong)
         if(matchID == Int.int2long(-1)) {

@@ -8,6 +8,12 @@ object Helper {
   val CHAMPIONS_LEAGUE = 1
   val DOMESTIC_CUP = 2
   val DUMMY_LEAGUE_ID: Long = -99
+  var dbURL: String = "jdbc:postgresql://localhost:5432/FFT_DATA?user=gsm&password=0909"
+  var dbDriver: String = "org.postgresql.Driver"
+
+  def setDBURL(db_url: String): Unit = {
+    dbURL = db_url
+  }
 
   def getLocale(leagueID: Long): Locale = {
     leagueID match {
